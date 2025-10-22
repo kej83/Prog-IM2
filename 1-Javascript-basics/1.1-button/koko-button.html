@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="siKoko()">Trykk for å høre gjøken</button>
+    <!-- 1. Finn lydfil med KOKO. f.eks. koko.mp3
+     2. Legg lydfilen i samme mappe som denne html-filen. 
+     3. src er navnet på lydfilen. -->
+    <audio src="koko.mp3" id="minLyd"></audio>
+    <script>
+        // Javascript
+        function siKoko() {
+            // DETTE SKJER
+            alert("KOKO!");
+            document.getElementById("minLyd").play();
+        }
+    </script>
+</body>
+</html>

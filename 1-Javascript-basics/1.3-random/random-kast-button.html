@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Terningkast tilfeldig</h1>
+    <button onclick="kast()">Kast terning</button>
+    <h2></h2>
+
+    <script>
+        function kast() {
+            // Tilfeldig kast.
+            // Math.random() gir tilfeldig tall mellom 0 og 1.
+            let kast = Math.floor(Math.random() * 6) + 1;
+            document.querySelector("h2").textContent = `Du fikk ${kast}-er.`;
+        }
+
+
+
+    </script>
+</body>
+
+</html>

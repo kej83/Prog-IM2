@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+ 
+<script>
+    // 1. Spør om timer og minutter
+    let timer = Number(prompt("Antall timer: "));
+    let minutter = Number(prompt("Antall minutter: "));
+
+    // 2. regn om til sekunder.
+    let sekunder = minutter * 60 + timer * 3600;
+
+    // 3. lag melding
+    // "3 timer og 15 minutter er xxx sekunder."
+    let melding = `${timer} timer og ${minutter} minutter er ${sekunder} sekunder.`
+
+    // 4. skriv ut til skjerm, vise det frem
+    alert(melding);
+</script>
+</body>
+
+</html>
