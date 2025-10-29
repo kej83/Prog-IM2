@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Få 6-er og vinn premien!</h1>
+    <button onclick="kast()">Kast</button>
+    <h2>Du fikk 4-er. Prøv igjen.</h2>
+
+    <script>
+        function kast() {
+            // Dette skjer når knappen trykkes
+            // 1. tilfeldig kast
+            let kast = Math.floor(Math.random() * 6) + 1;
+            let txt = `Du fikk en ${kast}-er.`;
+            // 2. SJEKK OM det ble 6-er!
+            if (kast == 6) {
+                txt = "Halleluja! Du fikk 6-er!";
+            }
+
+            // 3. Vis på nettsiden
+            document.querySelector("h2").textContent = txt;
+        }
+    </script>
+</body>
+</html>

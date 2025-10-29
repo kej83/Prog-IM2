@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Du vant!</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #00d4ff, #8e2de2);
+      color: white;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 4rem;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      animation: bounce 1.5s infinite alternate;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      opacity: 0.9;
+    }
+
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: gold;
+      top: 0;
+      left: 50%;
+      animation: fall 2.5s linear infinite;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    button {
+      margin-top: 40px;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      color: white;
+      background: #ff4081;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 64, 129, 0.6);
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    button:hover {
+      background: #ff80ab;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Du vant! 🎲</h1>
+  <p>Gratulerer, du slo datamaskinen! 😎</p>
+  <button onclick="location.href='index.html'">Spill igjen</button>
+
+  <!-- Litt enkel “konfetti” -->
+  <div class="confetti" style="left:10%; animation-delay:0s;"></div>
+  <div class="confetti" style="left:30%; animation-delay:0.5s;"></div>
+  <div class="confetti" style="left:50%; animation-delay:1s;"></div>
+  <div class="confetti" style="left:70%; animation-delay:1.5s;"></div>
+  <div class="confetti" style="left:90%; animation-delay:2s;"></div>
+</body>
+</html>

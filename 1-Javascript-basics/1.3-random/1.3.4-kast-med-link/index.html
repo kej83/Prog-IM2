@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Kast to terninger</h1>
+    <button onclick="kast()">Kast terninger</button>
+    <h2>Vinn hvis:</h2>
+    <ul>
+        <li>To seksere</li>
+        <li>Sum større enn 9</li>
+    </ul>
+    <h2>Tap hvis:</h2>
+    <ul>
+        <li>Sum mindre enn 5</li>
+        <li>To enere</li>
+    </ul>
+
+    <script>
+        function kast() {
+            // 1. 2 terningkast
+            let kast1 = Math.floor(Math.random() * 6) + 1;
+            let kast2 = Math.floor(Math.random() * 6) + 1;
+
+            // Vis resultat
+            document.querySelector("h2").textContent = `${kast1} og ${kast2}`;
+            // 2. Sjekk regler
+            // 2 seksere????
+            // hvis kast 1 gav 6 OG kast 2 gav 6
+            if (kast1 == 6 && kast2 == 6) {
+                // Du vant
+                location.href='vinn.html'
+            }
+            // hvis summen er større enn 9
+            let summ = kast1 + kast2;
+            if (summ > 9){
+                // Du vant
+                location.href='vinn.html'
+            }
+
+            // OPPGAVE: se regler for tap og legg til kode som sender spillerne til tap.html dersom de taper.
+        }
+    </script>
+</body>
+</html>
