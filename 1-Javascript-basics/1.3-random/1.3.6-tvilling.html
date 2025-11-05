@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Trykk for å føde barn</h1>
+    <button onclick="lagBarn()">Lag barn</button>
+
+    <p>51,4% av fødsler gir gutt!</p>
+
+    <script>
+        function lagBarn() {
+            let tall1 = Math.random() * 100;
+            let tall2 = Math.random() * 100;
+            let barn1 = "jente";
+            let barn2 = "jente";
+            // 51,4% av fødsler gir gutt!
+           if (tall1 <= 51.4) {
+                barn1 = "gutt";
+           }
+           if (tall2 <= 51.4) {
+                barn2 = "gutt";
+           }
+           // Lag melding
+           let txt = `Du fikk ${barn1} og ${barn2}!`;
+           document.querySelector("p").textContent = txt;
+           // OPPGAVE: a) utvid til trillinger
+           // b) UTFORDRING: tell opp antall gutter og antall jenter
+           // F.eks. "Du fikk 2 gutter og 1 jente."
+        }
+    </script>
+</body>
+</html>

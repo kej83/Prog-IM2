@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Trykk for å føde barn</h1>
+    <button onclick="lagBarn()">Lag barn</button>
+
+    <p>51,4% av fødsler gir gutt!</p>
+
+    <script>
+        function lagBarn() {
+            let tall = Math.random() * 100;
+            document.querySelector("p").textContent = tall;
+
+            // 51,4% av fødsler gir gutt!
+            if (tall <= 51.4) {
+                document.querySelector("p").textContent += ". Du fikk gutt!";
+            } else {
+                document.querySelector("p").textContent += ". Du fikk jente!";
+            }
+
+        }
+    </script>
+</body>
+</html>
