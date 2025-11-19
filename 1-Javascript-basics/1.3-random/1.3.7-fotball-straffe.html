@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Det er 84% sannsynlighet for at Haaland scorer mål på et straffespark. -->
+
+    <h1>Haaland tar straffespark</h1>
+
+    <button onclick="spark()">Spark!</button>
+
+    <p id="resultatTxt"></p>
+
+    <script>
+        // JAVASCRIPT begynner her
+        function spark() {
+            // 1. Lag tilfeldig tall 0-1
+            let tall = Math.random();
+            // 2. Hvis tallet er mindre enn 0.84, MÅL!
+            if (tall < 0.84) {
+                document.getElementById("resultatTxt").textContent = "MÅL!";
+            } // 3. ELLERS, BOM!
+            else {
+                // TODO: Skriv kode her:
+                document.getElementById("resultatTxt").textContent = "BOM!";
+            }
+            
+            
+        }
+    </script>
+</body>
+</html>
