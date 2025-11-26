@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Kantine</h1>
+    <h2>Prisliste:</h2>
+ 
+    <ul>
+    <li>Eplejuice: 25 kr</li>   
+    <li>Varmmat: 55 kr</li> 
+    </ul>
+
+    <label for="inpEplejuice">Antall eplejuice:</label>
+    <input type="number" id="inpEplejuice"><br>
+
+    <label for="inpVarmmat">Antall varmmat:</label>
+    <input type="number" id="inpVarmmat"><br>
+
+    <button onclick="getPrice()">Bestill</button>
+    <p></p>
+
+    <script>
+        // FULLFØR TODO
+        let antallEplejuice = Number(document.getElementById("inpEplejuice").value);
+        let antallVarmmat = TODO;
+
+        // Priser, 25 kr eplejuice, 55 kr varmmat
+        let pris = 25 * antallEplejuice + TODO;
+
+        // Lag txt
+        let txt = `Du valgte ${antallEplejuice} eplejuice og ${TODO} varmmat. Du må betale ${TODO} kr.`;
+
+        // tekst på nettsiden
+        document.querySelector("p").textContent = TODO;
+        
+    </script>
+</body>
+</html>
