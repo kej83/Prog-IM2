@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label, input{
+            display:block;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Skole LOGIN</h1>
+
+    <label for="inputUsername">Username:</label>
+    <input type="text" id="inputUsername">
+    <label for="inputPassword">Password:</label>
+    <input type="password" id="inputPassword">
+
+    <button onclick="checkLogin()">Check login</button>
+    <p id="txtUt"></p>
+
+    <script>
+        function checkLogin(){
+            // FASIT
+            let correctUser = "jensern123";
+            let correctPassword = "2468";
+            // 1. LESE user og pw fra inputs
+            let user = document.getElementById("inputUsername").value;
+            let pw = document.getElementById("inputPassword").value;
+
+            // 2. Sjekk login
+            // 2 == "2" gir true
+            // 2 === "2" gir false (ikke lik datatyper)
+            // & ampersand
+            if (user == correctUser && pw == correctPassword) {
+                document.getElementById("txtUt").textContent = "Du er logget inn";
+            } else {
+                document.getElementById("txtUt").textContent = "Brukernavn eller passord er feil.";
+            }
+            
+        }
+    </script>
+
+</body>
+</html>

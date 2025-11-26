@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bestill burgere</h1>
+
+    <label for="inpBurgere">Antall burgere:</label>
+    <input type="number" id="inpBurgere">
+
+    <button onclick="getPrice()" >Få prisen</button>
+    <p id="txtUt"></p>
+
+    <script>
+        function getPrice() {
+            let antallBurgere = Number(document.getElementById("inpBurgere").value);
+            // TODO: 1. regn ut prisen når hver burger koster 45 kr.
+            // 2. Skriv ut på formen "Du kjøpte 3 burgere og må betale 135 kr."
+            // 3. EKSTRA: Hvis du kjøper mer enn 10 burgere, får du 20 % rabatt!
+        }
+    </script>
+
+</body>
+</html>
