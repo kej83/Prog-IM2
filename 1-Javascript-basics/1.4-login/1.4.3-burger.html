@@ -18,8 +18,19 @@
         function getPrice() {
             let antallBurgere = Number(document.getElementById("inpBurgere").value);
             // TODO: 1. regn ut prisen når hver burger koster 45 kr.
+            let pris = "???";
             // 2. Skriv ut på formen "Du kjøpte 3 burgere og må betale 135 kr."
+            let txt = `Du kjøpte ${"???"} burgere og må betale ${"???"} kr.`
             // 3. EKSTRA: Hvis du kjøper mer enn 10 burgere, får du 20 % rabatt!
+            if ( TODO) {
+                let rabatt = pris * 0.20;
+                let nyPris = pris - rabatt;
+                // Ny txt
+                txt = `Du kjøpte ${"???"} burgere og må betale ${"???"} kr. Du fikk ${rabatt} kr i rabatt!`
+            }
+            // 4. Skriv ut til skjermen
+            document.getElementById("txtUt").textContent = txt;
+            
         }
     </script>
 
