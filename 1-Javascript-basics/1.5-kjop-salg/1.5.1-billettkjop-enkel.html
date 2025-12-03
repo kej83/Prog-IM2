@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Enkelt billettkjøp</h1>
+
+    <ul>
+        <li>Pris voksen: 140 kr</li>
+    </ul>
+
+    <label for="inpAntall">Antall billetter:</label>
+    <input type="number" id="inpAntall" min="1" max="9">
+
+    <button onclick="kjop()">Kjøp billetter</button>
+    <p></p>
+
+    <script>
+       
+        function kjop(){
+           let prisVoksen = 140;
+           let antallBilletter = document.getElementById("inpAntall").value;
+
+           let pris = prisVoksen * antallBilletter;
+
+           let txtUt = `Du valgte ${antallBilletter} billetter og må betale ${pris} kr.`;
+
+           document.querySelector("p").textContent = txtUt;
+        }
+
+        
+    </script>
+</body>
+</html>
