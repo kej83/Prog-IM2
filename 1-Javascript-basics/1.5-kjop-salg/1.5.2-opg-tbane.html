@@ -20,14 +20,13 @@
 
     <script>
        
-        function kjop(){
-        
-           let prisPerPerson = TODO;
-           let antallBilletter = TODO;
-
-           let pris = TODO;
-
-           let txtUt = TODO;
+        function kjop() {
+           
+           let prisPerPerson = 30;
+           let antallBilletter = Number(document.getElementById("inpAntall").value);
+           
+           let pris = prisPerPerson * antallBilletter;
+           let txtUt = `Du kjøpte ${antallBilletter} billetter og må betale ${pris} kr.`;
 
            document.querySelector("p").textContent = txtUt;
         }

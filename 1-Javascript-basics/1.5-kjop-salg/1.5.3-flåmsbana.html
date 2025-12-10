@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Flåmsbana</h1>
+    <img width="300px" src="https://cdn.sanity.io/images/ycnqsi1u/production/689b099fcd02851a9a48d223404e693c128502ad-8192x5464.jpg?w=3840&q=75&fit=clip&auto=format" alt="Bilde av Flåmsbana om sommeren">
+    
+    <!-- Alder og antall billetter -->
+     <ul>
+        <li>Voksen: 350,-</li>
+        <li>Barn: 210,-</li>
+        <li>Pensjonist (67+): 120,-</li>
+     </ul>
+
+     <label for="inpAlder">Alder:</label>
+     <input type="number" id="inpAlder"> <br>
+     <label for="inpAntall">Antall:</label>
+     <input type="number" id="inpAntall"> <br>
+
+     <button onclick="visPris()">Vis pris</button>
+     <p></p>
+
+     <script>
+
+        function visPris() {
+            // 1. Les fra input boksene
+            let alder = Number(document.getElementById("inpAlder").value);
+            let antall = TODO;
+
+            // 2. bestem pris etter alder
+            let prisPerPerson = 0;
+            if (alder >= 67) {
+                // Pensjonist
+                prisPerPerson = 120;
+            } else if (TODO) {
+                // Voksen
+                prisPerPerson = TODO;
+            } else {
+                // Barn
+                TODO;
+            }
+
+            // 3. Regn ut pris, bruk variablene prisPerPerson og antall
+            let pris = TODO;
+
+            // 4. Skriv ut alder, antall billetter og totalpris.
+            let txtUt = `Du er ${alder} år gammel, valgte ${TODO} billetter og må betale ${TODO} kr.`
+
+            document.querySelector("p").textContent = TODO;
+        }
+
+            
+     </script>
+</body>
+</html>
