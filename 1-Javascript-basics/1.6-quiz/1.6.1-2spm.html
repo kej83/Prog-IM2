@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- TODO: (Valgfritt) Endre <title> til noe som passer quizen, f.eks. "Geografi-quiz Norge" -->
+</head>
+
+<body>
+    <h1>Geografi-spørsmål om Norge</h1>
+
+    <p>1. Hva er Norges lengste elv?</p>
+    <input type="text" id="inpSpm1">
+
+    <p>2. Hva kalles Norges høyeste fjell?</p>
+    <input type="text" id="inpSpm2">
+
+    <!-- TODO: Legg til spørsmål 3 her i HTML.
+         - Lag en <p> med teksten til spørsmål 3 (geografi om Norge).
+         - Lag et <input type="text"> under.
+         - Gi input-en en NY og tydelig id, f.eks. inpSpm3.
+         - Pass på at id-en du velger her blir brukt i JavaScript under.
+    -->
+
+    <button onclick="sjekkSvar()" >Sjekk svar</button>
+
+    <p id="txtUt"></p>
+
+    <script>
+        function sjekkSvar() {
+            let fasit1 = "Glomma";
+            let fasit2 = "Galdhøpiggen";  // 2469 moh
+
+            // TODO: Lag en ny fasit-variabel for spørsmål 3.
+            // - Kall den f.eks. fasit3.
+            // - Skriv inn korrekt fasit som tekst (samme svar du forventer at eleven skriver).
+
+            let brukersvar1 = document.getElementById("inpSpm1").value;
+            let brukersvar2 = document.getElementById("inpSpm2").value;
+
+            // TODO: Hent brukersvar for spørsmål 3.
+            // - Bruk document.getElementById(...) med id-en du ga input-en (f.eks. "inpSpm3")
+            // - Lagre det i en ny variabel, f.eks. brukersvar3.
+
+            // TODO: (Valgfritt, men anbefalt) Gjør svarene mer robuste:
+            // - Fjern mellomrom før/etter (trim).
+            // - Gjør om til samme store/små bokstaver (for eksempel alt til lowercase) for både fasit og brukersvar.
+            // - Da får eleven riktig selv om de skriver " glomma " eller "galdhøpiggen".
+
+            // Sjekk svar
+            let poeng = 0;
+            if (brukersvar1 == fasit1) {
+                poeng++;
+            }
+            if (brukersvar2 == fasit2) {
+                poeng++;
+            }
+
+            // TODO: Legg til en ny if-test for spørsmål 3.
+            // - Sammenlign brukersvar3 med fasit3.
+            // - Hvis riktig: øk poeng med 1.
+
+            // TODO: Endre teksten under så den viser "av 3" i stedet for "av 2".
+            // - Husk at det skal stemme med antall spørsmål i quizen.
+            let txt = `Du fikk ${poeng} av 2 riktige.`;
+
+            // TODO: (Valgfritt) Vis også hvilke spørsmål som var riktige/feil:
+            // - Lag en tekst som sier f.eks. "Spm1: riktig/feil, Spm2: ..., Spm3: ..."
+            // - Skriv det ut i txtUt (enten samme felt eller lag et nytt <p> med egen id).
+
+            document.getElementById("txtUt").textContent = txt;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Stein-Saks-Papir</h1>
+    <h2 id="cpuValgUt">Trykk for å spille.</h2>
+    <button onclick="spillerStein()">Stein</button>
+    <button onclick="spillerSaks()">Saks</button>
+    <button onclick="spillerPapir()">Papir</button>
+
+    <script>
+        function spillerStein() {
+            let tall = Math.ceil(Math.random() * 3);
+            let cpuValg = "";
+            let resultat = "";
+            // Avgjør vinner:
+            if (tall == 1) {
+                cpuValg = "stein";
+                resultat = "uavgjort";
+            } else if (tall == 2) {
+                cpuValg = "saks";
+                resultat = "spiller vant!";
+            } else {
+                cpuValg = "papir";
+                resultat = "CPU vant!";
+            }
+
+            let txt = `Spiller: Stein. CPU: ${cpuValg}. Resultat: ${resultat}`;
+            
+            // Skrive ut cpu-valget
+            document.getElementById("cpuValgUt").textContent = txt;
+        }
+
+        function spillerSaks() {
+            // TODO: fullfør funksjonen
+            // SUPERHINT: se på funksjonen spillerStein.
+        }
+
+        function spillerPapir() {
+            // TODO 2: fullfør funksjonen
+        }
+
+
+    </script>
+</body>
+
+</html>
