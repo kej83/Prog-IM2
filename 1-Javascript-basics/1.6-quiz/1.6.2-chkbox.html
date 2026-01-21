@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pensjonist eller ikke?</h1>
+    <h2>Billettpris 70 kr. (30 kr for pensjonister)</h2>
+    <input type="checkbox" id="chkPen"> Er pensjonist.
+
+    <br>
+    <button onclick="sjekkPensjonist()" >Sjekk pris</button>
+
+    <p id="txtUt"></p>
+    
+    <script>
+        // OPPGAVE: Lag en nettside der du kan hake av om du er elev eller ikke
+        // Hvis du er elev, skal du betale 80 kr for kinobillett, ellers betaler du 120 kr. Bruk checkbox
+        function sjekkPensjonist() {
+            // Hvis pensjonist, gi prisen 30 kr, ellers 70 kr.
+            let erPen = document.getElementById("chkPen").checked;
+            // checked gir true eller false
+            if (erPen) {
+                // Er pensjonist
+                let txt = "Du er pensjonist og må betale 30 kr."
+                document.getElementById("txtUt").textContent = txt;
+            } else {
+                let txt = "Du er ikke pensjonist og må betale 70 kr."
+                document.getElementById("txtUt").textContent = txt;
+            }
+            
+        }
+    </script>
+</body>
+</html>

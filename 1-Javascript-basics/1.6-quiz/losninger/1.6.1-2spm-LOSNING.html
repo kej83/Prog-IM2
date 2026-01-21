@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- TODO: (Valgfritt) Endre <title> til noe som passer quizen, f.eks. "Geografi-quiz Norge" -->
+</head>
+
+<body>
+    <h1>Geografi-spørsmål om Norge</h1>
+
+    <p>1. Hva er Norges lengste elv?</p>
+    <input type="text" id="inpSpm1">
+
+    <p>2. Hva kalles Norges høyeste fjell?</p>
+    <input type="text" id="inpSpm2">
+
+    <p>3. I hvilket fylke ligger Nannestad?</p>
+    <input type="text" id="inpSpm3">
+
+    <button onclick="sjekkSvar()" >Sjekk svar</button>
+
+    <p id="txtUt"></p>
+
+    <script>
+        // HER begynner javascript
+        function sjekkSvar() {
+            let fasit1 = "Glomma";
+            let fasit2 = "Galdhøpiggen";  // 2469 moh
+            let fasit3 = "Akershus";
+
+            let brukersvar1 = document.getElementById("inpSpm1").value;
+            let brukersvar2 = document.getElementById("inpSpm2").value;
+            let brukersvar3 = document.getElementById("inpSpm3").value;
+
+            // Sjekk svar
+            let poeng = 0;
+            if (brukersvar1 == fasit1) {
+                poeng++;
+            }
+            if (brukersvar2 == fasit2) {
+                poeng++;
+            }
+            if (brukersvar3 == fasit3) {
+                poeng++;
+            }
+
+            let txt = `Du fikk ${poeng} av 3 mulige.`;
+
+            document.getElementById("txtUt").textContent = txt;
+        }
+    </script>
+</body>
+
+</html>
