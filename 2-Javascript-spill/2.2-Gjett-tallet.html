@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Gjett-tallet (1-100)</h1>
+    <input type="number" min="1" max="100" id="inpTall">
+    <p id="txtUt"></p>
+
+    <script>
+        let fasit =  Math.ceil(Math.random()*100);  // 1-100
+
+        // Legg til keydown-event for input-feltet
+        let input = document.getElementById("inpTall");
+        let txtUt = document.getElementById("txtUt");
+
+        input.addEventListener("keydown", function (event) {
+            // Check if the key pressed is the "Enter" key
+            if (event.key === "Enter") {
+                // Svar avgitt, sjekk svar
+                let svar = input.value;
+                // Sjekk om for lavt
+                if (svar < fasit) {
+                    txtUt.textContent = "For lavt! Prøv igjen.";
+                }
+                // Sjekk om for høyt
+                else if (TODO) {
+
+                } 
+                // Hva blir tilbakemeldingen her?
+                else {
+                    TODO
+                }
+            }
+        }
+        );
+    </script>
+</body>
+
+</html>
