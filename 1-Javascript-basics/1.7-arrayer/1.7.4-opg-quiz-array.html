@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Array Quiz</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --success: #10b981;
+            --success-bg: #d1fae5;
+            --error: #ef4444;
+            --error-bg: #fee2e2;
+            --text: #1f2937;
+            --bg: #f3f4f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .app-container {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: #e5e7eb;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 24px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .hint-text {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            color: var(--text);
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background-color: #eff6ff;
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+
+        /* States for options */
+        .option-btn.correct {
+            border-color: var(--success);
+            background-color: var(--success-bg);
+            color: #065f46;
+            font-weight: bold;
+        }
+
+        .option-btn.wrong {
+            border-color: var(--error);
+            background-color: var(--error-bg);
+            color: #991b1b;
+            opacity: 0.7;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+        }
+
+        .feedback-section.success {
+            background-color: var(--success-bg);
+            border: 1px solid var(--success);
+            display: block;
+        }
+
+        .feedback-section.error {
+            background-color: var(--error-bg);
+            border: 1px solid var(--error);
+            display: block;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .success .feedback-title { color: #065f46; }
+        .error .feedback-title { color: #991b1b; }
+
+        /* Next Button */
+        .controls {
+            padding: 24px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-primary:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Result Screen */
+        .result-screen {
+            text-align: center;
+            padding: 40px 24px;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container" id="quiz-app">
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div id="question-view">
+        <div class="content">
+            <div class="header">
+                <span id="question-number">Spørsmål 1 av 30</span>
+                <span id="score-display">Poeng: 0</span>
+            </div>
+
+            <h2 id="question-text">Laster spørsmål...</h2>
+            <p class="hint-text" id="hint-text"></p>
+
+            <div class="options-grid" id="options-container">
+                </div>
+
+            <div id="feedback-box" class="feedback-section">
+                <span class="feedback-title" id="feedback-title"></span>
+                <span id="feedback-text"></span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="next-btn" class="btn-primary" disabled>Neste</button>
+        </div>
+    </div>
+
+    <div id="result-view" class="hidden">
+        <div class="result-screen">
+            <div class="score-circle" id="final-score">0%</div>
+            <h2>Godt jobba!</h2>
+            <p>Du er ferdig med testen.</p>
+            <p id="final-feedback"></p>
+            <button class="btn-primary" onclick="location.reload()">Ta quizen på nytt</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- DATA ---
+    const quizData = [
+    {
+      "question": "Hva er den første indeksen i et JavaScript-array?",
+      "hint": "Tenk på hvor programmerere starter å telle.",
+      "answerOptions": [
+        { "text": "0", "rationale": "Riktig! JavaScript starter tellingen på 0.", "isCorrect": true },
+        { "text": "1", "rationale": "Feil. Mennesker starter på 1, men arrays starter på 0.", "isCorrect": false },
+        { "text": "-1", "rationale": "Nei, negative tall brukes ikke til start.", "isCorrect": false },
+        { "text": "null", "rationale": "Null betyr 'ingenting', ikke startposisjonen.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Gitt `let venner = [\"per\", \"arne\", \"sara\"];`. Hvilken verdi har `venner[1]`?",
+      "hint": "Husk at den første verdien er på indeks 0.",
+      "answerOptions": [
+        { "text": "per", "rationale": "Dette er indeks 0.", "isCorrect": false },
+        { "text": "arne", "rationale": "Riktig! Arne ligger på plass nummer 1.", "isCorrect": true },
+        { "text": "sara", "rationale": "Sara ligger på indeks 2.", "isCorrect": false },
+        { "text": "jensern", "rationale": "Finnes ikke i listen.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hvilken egenskap bruker vi for å finne antall elementer?",
+      "hint": "Ordet betyr lengde på engelsk.",
+      "answerOptions": [
+        { "text": "size", "rationale": "Size brukes ikke på arrays i JS.", "isCorrect": false },
+        { "text": "count", "rationale": "Count er ikke en array-egenskap.", "isCorrect": false },
+        { "text": "length", "rationale": "Riktig! Length gir deg antallet.", "isCorrect": true },
+        { "text": "index", "rationale": "Index er posisjon, ikke antall.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva gjør metoden `.push()`?",
+      "hint": "Tenk på å dytte noe inn.",
+      "answerOptions": [
+        { "text": "Fjerner det siste elementet", "rationale": "Nei, det er .pop() som fjerner.", "isCorrect": false },
+        { "text": "Legger til bakerst", "rationale": "Riktig! Push legger til elementer på slutten.", "isCorrect": true },
+        { "text": "Legger til på starten", "rationale": "Nei, det er .unshift().", "isCorrect": false },
+        { "text": "Sletter hele arrayet", "rationale": "Nei, den legger bare til noe nytt.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva gjør metoden `.pop()`?",
+      "hint": "Motsatt av .push().",
+      "answerOptions": [
+        { "text": "Legger til element", "rationale": "Feil, push legger til.", "isCorrect": false },
+        { "text": "Fjerner siste element", "rationale": "Riktig! Pop fjerner det siste elementet.", "isCorrect": true },
+        { "text": "Snur rekkefølgen", "rationale": "Feil, reverse snur rekkefølgen.", "isCorrect": false },
+        { "text": "Fjerner første element", "rationale": "Feil, shift fjerner det første.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hvordan endrer man 'arne' (indeks 1) til 'jensern' i `let venner = [\"per\", \"arne\", \"sara\"];`?",
+      "hint": "Bruk navnet på arrayet og indeks.",
+      "answerOptions": [
+        { "text": "venner[1] = \"jensern\";", "rationale": "Riktig! Du overskriver verdien på indeks 1.", "isCorrect": true },
+        { "text": "venner[2] = \"jensern\";", "rationale": "Feil indeks. Dette endrer element 2.", "isCorrect": false },
+        { "text": "venner.change(1, \"jensern\");", "rationale": "Metoden .change() finnes ikke.", "isCorrect": false },
+        { "text": "venner = \"jensern\";", "rationale": "Dette sletter arrayet og lager en streng.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva svarer `indexOf()` hvis verdien ikke finnes?",
+      "hint": "Et negativt tall.",
+      "answerOptions": [
+        { "text": "0", "rationale": "0 betyr at den ligger først.", "isCorrect": false },
+        { "text": "-1", "rationale": "Riktig! -1 betyr 'ikke funnet'.", "isCorrect": true },
+        { "text": "false", "rationale": "Den returnerer et tall, ikke false.", "isCorrect": false },
+        { "text": "undefined", "rationale": "Nei, standard svar er -1.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva gjør `venner.splice(2, 1);`?",
+      "hint": "Start på 2, fjern 1.",
+      "answerOptions": [
+        { "text": "Legger til to ting", "rationale": "Splice brukes her for å fjerne.", "isCorrect": false },
+        { "text": "Fjerner 1 element fra indeks 2", "rationale": "Riktig! Start på indeks 2, fjern 1 stk.", "isCorrect": true },
+        { "text": "Fjerner 2 elementer fra indeks 1", "rationale": "Feil rekkefølge på tallene.", "isCorrect": false },
+        { "text": "Bytter plass", "rationale": "Nei, den fjerner elementet.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Arrayet har lengde 4. Hva er siste indeks?",
+      "hint": "Start på 0, tell til 4.",
+      "answerOptions": [
+        { "text": "4", "rationale": "Nei, 4 er utenfor arrayet.", "isCorrect": false },
+        { "text": "3", "rationale": "Riktig! Siste indeks er lengde minus 1.", "isCorrect": true },
+        { "text": "5", "rationale": "Altfor høyt.", "isCorrect": false },
+        { "text": "0", "rationale": "0 er den første.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva skjer med `venner.push(\"bo\")` to ganger?",
+      "hint": "Tillater lister duplikater?",
+      "answerOptions": [
+        { "text": "Ingenting andre gangen", "rationale": "Jo, arrays tillater like verdier.", "isCorrect": false },
+        { "text": "\"bo\" legges til to ganger", "rationale": "Riktig! Du får to 'bo' etter hverandre.", "isCorrect": true },
+        { "text": "Kræsj", "rationale": "Det går helt fint.", "isCorrect": false },
+        { "text": "Første \"bo\" slettes", "rationale": "Push sletter ingenting.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hvilke parenteser brukes for arrays?",
+      "hint": "Klammer.",
+      "answerOptions": [
+        { "text": "()", "rationale": "Nei, dette er for funksjoner.", "isCorrect": false },
+        { "text": "{}", "rationale": "Nei, dette er for objekter.", "isCorrect": false },
+        { "text": "[]", "rationale": "Riktig! Klammeparenteser lager arrays.", "isCorrect": true },
+        { "text": "<>", "rationale": "Dette er HTML.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "`let farger = [\"rød\", \"blå\"];` + `push(\"gul\")`?",
+      "hint": "Gul havner sist.",
+      "answerOptions": [
+        { "text": "[\"gul\", \"rød\", \"blå\"]", "rationale": "Feil, push legger til bakerst.", "isCorrect": false },
+        { "text": "[\"rød\", \"blå\", \"gul\"]", "rationale": "Riktig! Gul havner etter blå.", "isCorrect": true },
+        { "text": "[\"rød\", \"gul\"]", "rationale": "Blå blir ikke borte.", "isCorrect": false },
+        { "text": "[\"gul\"]", "rationale": "De andre forsvinner ikke.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Finn posisjonen til 'sara' i `venner`?",
+      "hint": "Søk etter indeks.",
+      "answerOptions": [
+        { "text": "venner.getPosition(\"sara\")", "rationale": "Finnes ikke.", "isCorrect": false },
+        { "text": "venner.indexOf(\"sara\")", "rationale": "Riktig! indexOf gir deg posisjonen.", "isCorrect": true },
+        { "text": "venner.find(\"sara\")", "rationale": "Find gir elementet, ikke tallet.", "isCorrect": false },
+        { "text": "venner.search(\"sara\")", "rationale": "Search er for tekststrenger.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva blir `[1, 2, 3].length`?",
+      "hint": "Tell antall ting.",
+      "answerOptions": [
+        { "text": "2", "rationale": "For lavt.", "isCorrect": false },
+        { "text": "3", "rationale": "Riktig! Det er 3 tall i listen.", "isCorrect": true },
+        { "text": "4", "rationale": "For høyt.", "isCorrect": false },
+        { "text": "0, 1, 2", "rationale": "Dette er indeksene, ikke lengden.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Kan et array ha både tall og tekst?",
+      "hint": "Er JS strengt?",
+      "answerOptions": [
+        { "text": "Ja", "rationale": "Riktig! Du kan blande datatyper.", "isCorrect": true },
+        { "text": "Nei", "rationale": "Jo, i JavaScript går det fint.", "isCorrect": false },
+        { "text": "Kun med spesialkode", "rationale": "Nei, det virker automatisk.", "isCorrect": false },
+        { "text": "Bare tall er lov", "rationale": "Feil.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva skjer med resten av listen når du tar `pop()`?",
+      "hint": "Flytter de på seg?",
+      "answerOptions": [
+        { "text": "De flyttes til høyre", "rationale": "Nei, de står i ro.", "isCorrect": false },
+        { "text": "Ingenting, de beholder plass", "rationale": "Riktig! Kun siste mann forsvinner.", "isCorrect": true },
+        { "text": "Indeksene endres", "rationale": "Nei, ikke ved pop().", "isCorrect": false },
+        { "text": "Arrayet blir tomt", "rationale": "Kun ett element fjernes.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva gjør `venner.splice(0, 1)`?",
+      "hint": "Start på 0, fjern 1.",
+      "answerOptions": [
+        { "text": "Fjerner aller første element", "rationale": "Riktig! Den fjerner elementet på indeks 0.", "isCorrect": true },
+        { "text": "Legger til på indeks 0", "rationale": "Nei, den fjerner.", "isCorrect": false },
+        { "text": "Fjerner siste element", "rationale": "Indeks 0 er starten.", "isCorrect": false },
+        { "text": "Gjør ingenting", "rationale": "Den endrer arrayet.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Arrayet har 3 ting. Du ber om `venner[10]`. Hva skjer?",
+      "hint": "Det er tomt der.",
+      "answerOptions": [
+        { "text": "Kræsj", "rationale": "JS kræsjer ikke.", "isCorrect": false },
+        { "text": "Du får `undefined`", "rationale": "Riktig! Plassen er udefinert.", "isCorrect": true },
+        { "text": "Du får `null`", "rationale": "Nei, undefined er standard.", "isCorrect": false },
+        { "text": "Du får tallet -1", "rationale": "Det er kun ved søk.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hvordan legge til \"a\" og \"b\" samtidig med push?",
+      "hint": "Bruk komma.",
+      "answerOptions": [
+        { "text": "venner.push(\"a\", \"b\");", "rationale": "Riktig! Komma skiller verdiene.", "isCorrect": true },
+        { "text": "venner.push(\"a\" + \"b\");", "rationale": "Dette blir 'ab' (en ting).", "isCorrect": false },
+        { "text": "venner.push(\"a\" & \"b\");", "rationale": "Feil syntaks.", "isCorrect": false },
+        { "text": "Må tas en av gangen", "rationale": "Nei, flere går fint.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Lengde er 3. Hva er lengde etter `pop()`?",
+      "hint": "3 minus 1.",
+      "answerOptions": [
+        { "text": "3", "rationale": "Den må bli mindre.", "isCorrect": false },
+        { "text": "2", "rationale": "Riktig! En mindre enn før.", "isCorrect": true },
+        { "text": "1", "rationale": "Den fjerner ikke to ting.", "isCorrect": false },
+        { "text": "4", "rationale": "Pop øker ikke lengden.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hvilken variabeltype er best for arrays?",
+      "hint": "Den som er konstant.",
+      "answerOptions": [
+        { "text": "let", "rationale": "Let virker, men const er bedre.", "isCorrect": false },
+        { "text": "const", "rationale": "Riktig! Const er vanligst for arrays.", "isCorrect": true },
+        { "text": "var", "rationale": "Var er gammeldags.", "isCorrect": false },
+        { "text": "array", "rationale": "Finnes ikke som nøkkelord.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva skjer med `pop()` på et tomt array?",
+      "hint": "Tomt er tomt.",
+      "answerOptions": [
+        { "text": "Kræsj", "rationale": "Neida, det går bra.", "isCorrect": false },
+        { "text": "Returnerer `undefined`", "rationale": "Riktig! Ingenting å hente ut.", "isCorrect": true },
+        { "text": "Lengden blir -1", "rationale": "Lengde kan ikke være negativ.", "isCorrect": false },
+        { "text": "Returnerer 0", "rationale": "Feil.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hvilken metode sletter elementer midt i?",
+      "hint": "Start, antall.",
+      "answerOptions": [
+        { "text": "pop", "rationale": "Pop er bare slutten.", "isCorrect": false },
+        { "text": "slice", "rationale": "Slice kopierer, sletter ikke.", "isCorrect": false },
+        { "text": "splice", "rationale": "Riktig! Splice klipper ut biter.", "isCorrect": true },
+        { "text": "remove", "rationale": "Finnes ikke.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Array: `[\"a\", \"b\", \"c\"]`. Indeks til \"c\"?",
+      "hint": "Telling fra 0.",
+      "answerOptions": [
+        { "text": "2", "rationale": "Riktig! a=0, b=1, c=2.", "isCorrect": true },
+        { "text": "3", "rationale": "3 er lengden.", "isCorrect": false },
+        { "text": "1", "rationale": "1 er \"b\".", "isCorrect": false },
+        { "text": "c", "rationale": "Vi ser etter et tall.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Array lengde 2. Du setter `venner[5] = \"Ole\"`.",
+      "hint": "Hva skjer med plass 3 og 4?",
+      "answerOptions": [
+        { "text": "Feilmelding", "rationale": "Nei, det er lov.", "isCorrect": false },
+        { "text": "Du får tomme plasser imellom", "rationale": "Riktig! Plassene imellom blir tomme.", "isCorrect": true },
+        { "text": "Ole havner på plass 2", "rationale": "Nei, han havner på 5.", "isCorrect": false },
+        { "text": "Ingenting", "rationale": "Arrayet utvides.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Er `length` en metode () eller egenskap?",
+      "hint": "Bruker du parenteser?",
+      "answerOptions": [
+        { "text": "Metode ()", "rationale": "Feil, ingen parenteser.", "isCorrect": false },
+        { "text": "Egenskap (property)", "rationale": "Riktig! Det er en verdi.", "isCorrect": true },
+        { "text": "Datatype", "rationale": "Nei.", "isCorrect": false },
+        { "text": "Event", "rationale": "Nei.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva gjør `txtUt.innerHTML += venner;`?",
+      "hint": "Pluss er lik.",
+      "answerOptions": [
+        { "text": "Sletter alt først", "rationale": "Da måtte du brukt =.", "isCorrect": false },
+        { "text": "Legger til teksten etter det gamle", "rationale": "Riktig! += legger til mer.", "isCorrect": true },
+        { "text": "Lager tabell", "rationale": "Nei, bare tekst.", "isCorrect": false },
+        { "text": "Ingenting", "rationale": "Teksten oppdateres.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva er resultatet av `typeof [1, 2]`?",
+      "hint": "Teknisk sett.",
+      "answerOptions": [
+        { "text": "array", "rationale": "Faktisk ikke i JS.", "isCorrect": false },
+        { "text": "object", "rationale": "Riktig! Arrays er objekter i JS.", "isCorrect": true },
+        { "text": "list", "rationale": "Finnes ikke.", "isCorrect": false },
+        { "text": "collection", "rationale": "Finnes ikke.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hvordan tømme arrayet med length?",
+      "hint": "Sett lengden til null.",
+      "answerOptions": [
+        { "text": "venner.length = 0;", "rationale": "Riktig! Dette sletter alt.", "isCorrect": true },
+        { "text": "venner.length = null;", "rationale": "Virker ikke.", "isCorrect": false },
+        { "text": "venner.length = -1;", "rationale": "Gir feilmelding.", "isCorrect": false },
+        { "text": "venner.length = [];", "rationale": "Feil type.", "isCorrect": false }
+      ]
+    },
+    {
+      "question": "Hva skjer med `.splice(1, 0, \"per\")`?",
+      "hint": "Du fjerner 0 ting.",
+      "answerOptions": [
+        { "text": "Sletter \"per\"", "rationale": "Nei.", "isCorrect": false },
+        { "text": "Setter inn \"per\" på plass 1", "rationale": "Riktig! Den putter inn uten å slette.", "isCorrect": true },
+        { "text": "Sletter alt etter 1", "rationale": "Nei, 0 slettes.", "isCorrect": false },
+        { "text": "Ingenting", "rationale": "Listen endres.", "isCorrect": false }
+      ]
+    }
+    ];
+
+    // --- LOGIC ---
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    // DOM Elements
+    const questionText = document.getElementById('question-text');
+    const hintText = document.getElementById('hint-text');
+    const optionsContainer = document.getElementById('options-container');
+    const nextBtn = document.getElementById('next-btn');
+    const feedbackBox = document.getElementById('feedback-box');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackText = document.getElementById('feedback-text');
+    const questionNumberDisplay = document.getElementById('question-number');
+    const scoreDisplay = document.getElementById('score-display');
+    const progressBar = document.getElementById('progress-bar');
+    const questionView = document.getElementById('question-view');
+    const resultView = document.getElementById('result-view');
+
+    // Initialize
+    function initQuiz() {
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const currentData = quizData[currentQuestionIndex];
+        
+        // Update Text
+        questionNumberDisplay.innerText = `Spørsmål ${currentQuestionIndex + 1} av ${quizData.length}`;
+        scoreDisplay.innerText = `Poeng: ${score}`;
+        questionText.innerText = currentData.question;
+        hintText.innerText = `Hint: ${currentData.hint}`;
+        
+        // Update Progress Bar
+        const progressPercent = ((currentQuestionIndex) / quizData.length) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+
+        // Reset UI
+        optionsContainer.innerHTML = '';
+        feedbackBox.style.display = 'none';
+        feedbackBox.className = 'feedback-section';
+        nextBtn.disabled = true;
+
+        // Create Options
+        currentData.answerOptions.forEach((option, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = option.text;
+            btn.onclick = () => handleAnswer(option, btn, currentData.answerOptions);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function handleAnswer(selectedOption, btnElement, allOptions) {
+        // Disable all buttons to prevent double answers
+        const allButtons = optionsContainer.querySelectorAll('.option-btn');
+        allButtons.forEach(b => b.disabled = true);
+
+        // Logic
+        const isCorrect = selectedOption.isCorrect;
+        
+        if (isCorrect) {
+            score++;
+            btnElement.classList.add('correct');
+            showFeedback(true, selectedOption.rationale);
+        } else {
+            btnElement.classList.add('wrong');
+            
+            // Highlight the actual correct answer to help learning
+            allOptions.forEach((opt, idx) => {
+                if (opt.isCorrect) {
+                    allButtons[idx].classList.add('correct');
+                }
+            });
+            
+            showFeedback(false, selectedOption.rationale);
+        }
+
+        scoreDisplay.innerText = `Poeng: ${score}`;
+        nextBtn.disabled = false;
+    }
+
+    function showFeedback(isCorrect, rationale) {
+        feedbackBox.style.display = 'block';
+        if (isCorrect) {
+            feedbackBox.classList.add('success');
+            feedbackTitle.innerText = "Riktig!";
+        } else {
+            feedbackBox.classList.add('error');
+            feedbackTitle.innerText = "Ikke helt...";
+        }
+        feedbackText.innerText = rationale;
+    }
+
+    nextBtn.onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    };
+
+    function showResult() {
+        questionView.classList.add('hidden');
+        resultView.classList.remove('hidden');
+        progressBar.style.width = '100%';
+        
+        const percentage = Math.round((score / quizData.length) * 100);
+        document.getElementById('final-score').innerText = `${percentage}%`;
+        
+        const finalMsg = document.getElementById('final-feedback');
+        if (percentage >= 80) {
+            finalMsg.innerText = "Fantastisk! Du er en array-mester!";
+        } else if (percentage >= 50) {
+            finalMsg.innerText = "Bra jobba! Litt mer øving så sitter alt.";
+        } else {
+            finalMsg.innerText = "Fin innsats! Prøv igjen for å lære mer.";
+        }
+    }
+
+    // Start
+    initQuiz();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Array med venner</h1>
+    <p></p>
+
+    <script>
+        let txtUt = document.querySelector("p");
+
+        let venn1 = "per";
+        let venn2 = "arne";
+        let venn3 = "sara";
+        let venn4 = "ali baba";
+
+        // Lagre venner med array
+        // array er variabel med flere verdier
+        let venner = ["per", "arne", "sara", "ali baba"];
+        // Skrive ut hele arrayet
+        txtUt.innerHTML = venner + "<br>";
+
+        // I array har hver verdi en indeks.
+        // indeks - verdi
+        // 0 - "per"
+        // 1 - "arne"
+        // osv.
+        txtUt.innerHTML += "venner[1] = " + venner[1] + "<br>";
+        txtUt.innerHTML += "venner[0] = " + venner[0] + "<br>";
+        txtUt.innerHTML += venner[3] + "<br>";
+        txtUt.innerHTML += "venner[4] = " + venner[4];
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Array med venner</h1>
+    <p></p>
+
+    <script>
+        let txtUt = document.querySelector("p");
+    
+        let venner = ["per", "arne", "sara", "ali baba"];
+        // Skrive ut hele arrayet
+        txtUt.innerHTML = venner + "<br>";
+
+        // Legge til med push
+        venner.push("jens");
+        txtUt.innerHTML += venner + "<br>";
+        venner.push("mette marit");
+        txtUt.innerHTML += venner + "<br>";
+
+        // Fjern med pop
+        venner.pop();
+        txtUt.innerHTML += venner + "<br>";
+        venner.pop();
+        txtUt.innerHTML += venner + "<br>";
+
+        // Fjerne bestemt verdi, f.eks. sara
+        let index = venner.indexOf("sara");  // 2
+        venner.splice(index, 1);
+        txtUt.innerHTML += venner + "<br>";
+
+    </script>
+</body>
+</html>

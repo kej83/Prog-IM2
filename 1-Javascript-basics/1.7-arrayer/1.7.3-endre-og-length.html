@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Array med venner</h1>
+    <p></p>
+
+    <script>
+        let txtUt = document.querySelector("p");
+
+        let venner = ["per", "arne", "sara", "ali baba"];
+        // Skrive ut hele arrayet
+        txtUt.innerHTML = venner + "<br>";
+
+        // ENDRE verdier
+        // bytte ut arne med jensern
+        venner[1] = "jensern";
+        txtUt.innerHTML += venner + "<br>";
+        // bytte ut ali baba med knut
+        venner[3] = "knut";
+        txtUt.innerHTML += venner + "<br>";
+
+        // Antall venner?
+        txtUt.innerHTML += venner.length + "<br>";  // 4
+        venner.push("ea");
+        venner.push("bo");
+        txtUt.innerHTML += venner.length + "<br>";  // 6
+
+    </script>
+</body>
+</html>
