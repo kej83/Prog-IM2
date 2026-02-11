@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mine venner</h1>
+    <input type="text" id="inpNavn">
+    <button onclick="visVenner()">Vis alle venner</button>
+    <button onclick="leggTilVenn()">Legg til venn</button>
+    <button onclick="fjernVenn()">Fjern siste venn</button>
+    <p></p>
+
+    <script>
+        function fjernVenn(){
+            // TODO:
+        }
+        function leggTilVenn(){
+            // 1. lese inn navn fra input-boks med id="inpNavn"
+            let nyVenn = document.getElementById("inpNavn").value;
+            // 2. legg til vennen i arrayet
+            venner.push(nyVenn);
+        }
+
+        function visVenner(){
+            let txtUt = venner.join("<br>");
+            document.querySelector("p").innerHTML = txtUt;
+        }
+
+        let venner = ["per", "arne", "sara"];
+
+
+    </script>
+</body>
+</html>
