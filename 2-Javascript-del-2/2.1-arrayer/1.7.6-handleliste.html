@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Handleliste</h1>
+
+    <input type="text" id="inpVare">
+    <button onclick="seHandleliste()">Se handleliste</button>
+    <button onclick="antallVarer()">Antall varer</button>
+    <!-- TODO: legg til onclick i de to knappene nedenfor, og lag funksjonene i javascript -->
+    <button>Fjern siste vare</button>
+    <button>Legg til vare</button>
+
+    <p></p>
+
+    <script>
+        // TODO: Lag funksjonene for fjern siste vare og legg til vare!
+        
+        function seHandleliste(){
+            let txtUt = liste.join("<br>");
+            document.querySelector("p").innerHTML = txtUt;
+        }
+
+        function antallVarer(){
+            let antall = liste.length;
+            let txtUt = `Det er ${antall} varer i handlelista.`;
+            document.querySelector("p").textContent = txtUt;
+        }
+
+        let liste = ["brød", "melk", "ost"];
+
+    </script>
+</body>
+</html>
