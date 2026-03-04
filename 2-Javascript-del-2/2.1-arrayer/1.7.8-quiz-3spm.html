@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Quiz</h1>
+    <h4 id="spmUt"></h4>
+    <input type="text" id="inpSvar">
+    <p id="txtUt"></p>
+
+    <script>
+        function knappTrykket(event) {
+            // If the user presses the "Enter" key
+            if (event.key === "Enter") {
+                // Svar avgitt, sjekk om riktig
+                txtUt.textContent = "Du trykket Enter, hurra!";
+                // Les inn brukersvar
+                let brukerSvar = inpSvar.value;
+                // Sammenlign svar med fasit
+                if(brukerSvar === fasit[index]) {
+                    txtUt.textContent = "Riktig svar!";
+                } else {
+                    txtUt.textContent = "Feil svar, riktig svar var " + fasit[index];
+                }
+                // Neste spørsmål
+                index++;  // øker index med 1
+                spmUt.textContent = spm[index];
+            }
+        }
+        
+        let inpSvar = document.getElementById("inpSvar");
+        let spmUt = document.getElementById("spmUt");
+        let txtUt = document.getElementById("txtUt");
+
+        inpSvar.addEventListener("keydown", knappTrykket);
+
+        let spm = ["Hva er Norges lengste elv?", "Hvilket fylket ligger Oslo i?", "I hvilket fylke ligger Nannestad?"]
+        let fasit = ["Glomma", "Oslo", "Akershus"];
+        let index = 0;
+        spmUt.textContent = spm[index];
+
+    </script>
+</body>
+
+</html>
