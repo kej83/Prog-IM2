@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hotell Alexandra</h1>
+
+    <label for="inpNavn">Fornavn:</label>
+    <input type="text" id="inpNavn"><br>
+
+    <label for="inpNavn">Romnr:</label>
+    <input type="number" id="inpRomnr"><br>
+
+    <button onclick="visOversikt()">Vis oversikt</button>
+    <button onclick="bookRom()">Book rom</button>
+    <button onclick="sjekkUt()">Sjekk ut</button>
+    <p id="txtUt"></p>
+
+    <script>
+       function visOversikt() {
+           let txt = "<h2>Oversikt</h2>";
+           txt += "<ul>";
+           for (let romnr = 0; romnr < rom.length; romnr++) {
+               txt += `<li>Romnr:${romnr}: ${rom[romnr]}</li>`;
+           }
+           txt += "</ul>";
+
+           document.getElementById("txtUt").innerHTML = txt;
+       }
+
+       function bookRom() {
+          // 1. Les inn romnr og fornavn
+          let romnr = document.getElementById("inpRomnr").value;
+          let fornavn = document.getElementById("inpNavn").value;  
+          // 2. Sjekk om romnr er ledig
+          if (rom[romnr] === "") {
+            // Ledig! Book brukeren inn.
+            rom[romnr] = fornavn;
+            document.getElementById("txtUt").textContent = `${fornavn} ble booket inn på rom nr ${romnr}.`;
+          } else {
+            // Rommet var opptatt
+            document.getElementById("txtUt").textContent = "Feil! Rommet er opptatt. Forsøk et annet romnr.";
+          }
+          // 3. Hvis ledig, sjekk inn fornavn på romnr, ellers gi feilmelding.
+       }
+       
+       function sjekkUt() {
+          // 1. Les inn romnr
+
+          // 2. Endre verdien til rommet til "" for ledig.
+        
+          // Ekstra: Hvis rommet allerede er ledig, gi feilmelding.
+       }
+       let rom = ["jens", "", "sara", "", ""];
+    </script>
+</body>
+</html>
